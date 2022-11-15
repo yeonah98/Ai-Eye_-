@@ -1,0 +1,139 @@
+
+/* 개발때만 사용 */
+/* .nav {
+    border: 1px solid green;
+}
+.content {
+    border: 1px solid black;
+}
+.noSee {
+    border: 1px solid blue;
+}
+.yesSee{
+    border: 1px solid purple;
+} */
+
+
+/* UA Reset */
+body, h1, h2, h3, p, button{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none; 
+    outline: none;
+    text-align: center;    
+}
+
+/* Typography */
+
+:root {
+    font-size: 62.5%; /* 10px */
+    color: var(--font-color);
+}
+
+/* Colors */
+:root {
+    --background-color: #F4F3F4;
+    --main-color: #F5E495;
+    --font-color: #4a4846;
+    --white-box: #FEFFFF;
+    --button-background-color: #EAC645;
+    --button-font-color: #fefefe;
+    --button-hover-color: #ecd149;
+    --red-color: #D4412D;
+    --green-color: #65C87A;
+}
+
+
+/* Layout */
+body {
+    max-width: 500px; 
+    margin: 0 auto;
+    background-color: var(--background-color)
+}
+
+.nav {
+    background-color: var(--main-color);
+    height: 10vh;
+    position: relative;
+    display: flex;
+}
+
+.nav_wrapper {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translate(20px, -50%)
+}
+
+.content {
+    height: 90vh;
+    box-sizing: border-box;
+    position: relative;
+    overflow: auto;
+}
+
+.noSee {
+    justify-content: center;
+    align-items : center;
+}
+
+.noSee_wrapper {
+   margin: 20px 40px;
+}
+
+.yesSee {
+    justify-content: center;
+    align-items : center;
+}
+
+.yesSee_wrapper {
+    margin: 20px 40px;
+}
+
+/* Components */
+.icon_arrow {
+    height: 18px;
+}
+
+.icon_camera {
+    height: 30px;
+    margin-left: 20%;
+    filter: opacity(0.5) drop-shadow(0 0 0 #362d20);
+}
+
+.content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.whiteBox {
+    background-color: var(--white-box);
+    border-radius: 5px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+}
+.whiteBox h3 {
+    font-size: 1.6rem;
+}
+.whiteBox p {
+    font-size: 1.2rem;
+}
+
+
+/* nav 부분 */
+.icon_arrow {
+    margin-right: 1rem;
+}
+
+.nav h2 {
+    font-size: 2rem;
+}
+
+/* 읽지 않은 알림 부분 */

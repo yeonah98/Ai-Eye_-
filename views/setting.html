@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./setting.css" rel="stylesheet"></link>
+    <title>아이아이(AI-EYE)</title>
+</head>
+<body>
+    <header class="nav">
+        <div class="nav_wrapper">
+            <a href="/main"><img class="icon_arrow" alt="back" src="/icons/arrow.png"></img></a>
+            <h2>웹캠 설정</h2>
+        </div>
+    </header>
+    <div class="content">
+        <div class="onOff">
+            <div class="onOff_wrapper">
+                <h2>웹캠 ON/OFF</h2>
+                <div class="whiteBox">
+                    <h3>아이에게 쓰러짐 행동이 감지되었습니다.</h3>
+                    <input type="checkbox" id="toggle_onOff" hidden> 
+                    <label for="toggle_onOff" class="toggleSwitch">
+                        <span class="toggleButton"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="timer">
+            <div class="timer_wrapper">
+                <h2>시간 예약</h2>
+                <div class="whiteBox">
+                    <h3>현재 ~ 2:00PM까지</h3>
+                    <input type="checkbox" id="toggle_timer" hidden> 
+                    <label for="toggle_timer" class="toggleSwitch">
+                        <span class="toggleButton"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
