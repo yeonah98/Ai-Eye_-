@@ -1,0 +1,192 @@
+
+/* 개발때만 사용 */
+/* .alarmHistory {
+    border: 1px solid green;
+}
+.setting {
+    border: 1px solid blue;
+}
+.notice{
+    border: 1px solid purple;
+} */
+
+
+/* UA Reset */
+body, h1, h2, h3, p, button{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+a, button {
+    text-decoration: none; 
+    outline: none;
+    text-align: center;    
+}
+
+/* Typography */
+:root {
+    font-size: 62.5%; /* 10px */
+    color: var(--font-color);
+}
+
+/* Colors */
+:root {
+    --background-color: #F4F3F4;
+    --main-color: #F5E495;
+    --font-color: #4a4846;
+    --white-box: #FEFFFF;
+    --button-background-color: #EAC645;
+    --button-font-color: #fefefe;
+    --button-hover-color: #ecd149;
+    --red-color: #D4412D;
+    --green-color: #65C87A;
+}
+
+/* Layout */
+body {
+    max-width: 500px; 
+    margin: 0 auto;
+    background-color: var(--background-color)
+}
+
+.profile {
+    background-color: var(--main-color);
+    height: 20vh;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.profile_wrapper {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(0, -50%)
+}
+
+.content {
+    height: 80vh;
+}
+
+.alarmHistory {
+    height: 20%;
+    position: relative;
+}
+
+.setting {
+    height: 30%;
+    justify-content: center;
+    align-items : center;
+}
+
+.setting_wrapper {
+    box-sizing: border-box;
+    width: auto;
+    margin: 20px 40px;
+}
+
+.notice{
+    height: 50%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items : center;
+}
+
+.notice_wrapper {
+    box-sizing: border-box;
+    margin: 20px 40px;
+}
+
+/* Components */
+
+.icon_user {
+    height: 70px;
+    margin-right: 1.4rem;
+}
+
+.icon_setting {
+    height: 18px;
+    margin-left: 0.8rem;
+    margin-top: 0.8rem;
+    filter: opacity(0.5) drop-shadow(0 0 0 #362d20);
+}
+
+.icon_eye {
+    height: 40px;
+    filter: opacity(0.5) drop-shadow(0 0 0 #362d20);
+    margin-right: 2rem;
+}
+
+.btn {
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
+    padding: 14px 8px;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    width: 100px;
+}
+.btn:hover {
+    cursor: pointer;
+    background-color: var(--button-hover-color);
+}
+
+.content h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+.whiteBox {
+    background-color: var(--white-box);
+    border-radius: 5px;
+    display: flex;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+}
+.whiteBox a {
+    margin-left: 10%;
+}
+/* profile 부분 */
+
+.profile h2 {
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
+}
+
+.profile p {
+    font-size: 1.8rem;
+}
+
+/* 알림 히스토리 버튼 부분 */
+
+.historyBtn {
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 0;
+}
+
+/* 웹캠 설정 부분 */
+
+.whiteBox p {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+    margin-right: 1.4rem;
+}
+
+.whiteBox span {
+    font-size: 1.4rem;
+}
+
+/* 공지사항 부분 */
+.notice p {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}

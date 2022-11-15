@@ -1,0 +1,183 @@
+
+/* 개발때만 사용 */
+/* .nav {
+    border: 1px solid green;
+}
+.content {
+    border: 1px solid black;
+}
+.onOff {
+    border: 1px solid blue;
+}
+.timer{
+    border: 1px solid purple;
+} */
+
+
+/* UA Reset */
+body, h1, h2, h3, p, button{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none; 
+    outline: none;
+    text-align: center;    
+}
+
+/* Typography */
+
+:root {
+    font-size: 62.5%; /* 10px */
+    color: var(--font-color);
+}
+
+/* Colors */
+:root {
+    --background-color: #F4F3F4;
+    --main-color: #F5E495;
+    --font-color: #4a4846;
+    --white-box: #FEFFFF;
+    --button-background-color: #EAC645;
+    --button-font-color: #fefefe;
+    --button-hover-color: #ecd149;
+    --red-color: #D4412D;
+    --green-color: #65C87A;
+}
+
+
+/* Layout */
+body {
+    max-width: 500px; 
+    margin: 0 auto;
+    background-color: var(--background-color)
+}
+
+.nav {
+    background-color: var(--main-color);
+    height: 10vh;
+    position: relative;
+    display: flex;
+}
+
+.nav_wrapper {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translate(20px, -50%)
+}
+
+.content {
+    height: 90vh;
+    box-sizing: border-box;
+    position: relative;
+    overflow: auto;
+}
+
+.onOff {
+    justify-content: center;
+    align-items : center;
+}
+
+.onOff_wrapper {
+   margin: 40px;
+}
+
+.timer {
+    justify-content: center;
+    align-items : center;
+}
+
+.timer_wrapper {
+    margin: 50px 40px;
+}
+
+/* Components */
+.icon_arrow {
+    height: 18px;
+}
+
+.icon_camera {
+    height: 30px;
+    margin-left: 20%;
+    filter: opacity(0.5) drop-shadow(0 0 0 #362d20);
+}
+
+.content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.whiteBox {
+    background-color: var(--white-box);
+    border-radius: 5px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items : center;
+    justify-content: space-between;
+}
+.whiteBox h3 {
+    font-size: 1.6rem;
+}
+.whiteBox p {
+    font-size: 1.2rem;
+}
+
+.toggleSwitch {
+    min-width: 6rem;
+    height: 3rem;
+    display: block;
+    position: relative;
+    border-radius: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 1rem 3px rgba(0 0 0 / 10%);
+    cursor: pointer;
+}
+  
+/* 토글 버튼 */
+.toggleSwitch .toggleButton {
+    /* 버튼은 토글보다 작아야함  */
+    width: 2.6rem;
+    height: 2.6rem;
+    position: absolute;
+    top: 7%;
+    left: .2rem;
+    /* transform: translateY(-50%); */
+    border-radius: 50%;
+    background: var(--green-color);
+}
+  /* 체크박스가 체크될 시 변경되는 요소 */
+#toggle_onOff:checked ~ .toggleSwitch, 
+#toggle_timer:checked ~ .toggleSwitch {
+    background: var(--green-color);
+}
+  
+#toggle_onOff:checked ~ .toggleSwitch .toggleButton,
+#toggle_timer:checked ~ .toggleSwitch .toggleButton {
+    /* 100% -> 끝위치, 2.8rem -> 버튼 크기 */
+    left: calc(100% - 2.8rem);
+    background: #fff;
+}
+
+.toggleSwitch, .toggleButton {
+    transition: all 0.2s ease-in;
+}
+
+/* nav 부분 */
+.icon_arrow {
+    margin-right: 1rem;
+}
+
+.nav h2 {
+    font-size: 2rem;
+}
+
+/* timer 부분 */
+.timer_wrapper h3 {
+    font-size: 2.4rem;
+}

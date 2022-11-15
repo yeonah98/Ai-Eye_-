@@ -1,0 +1,78 @@
+
+/* 개발때만 사용 */
+/* .container {
+    border: 1px solid green;
+} */
+
+/* UA Reset */
+body, h1, h2, h3, p, button{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none; 
+    outline: none;
+    text-align: center;    
+}
+
+/* Typography */
+
+:root {
+    font-size: 62.5%; /* 10px */
+    color: var(--font-color);
+}
+
+/* Colors */
+:root {
+    --background-color: #F4F3F4;
+    --main-color: #F5E495;
+    --font-color: #4a4846;
+    --white-box: #FEFFFF;
+    --button-background-color: #EAC645;
+    --button-font-color: #fefefe;
+    --button-hover-color: #ecd149;
+    --red-color: #D4412D;
+    --green-color: #65C87A;
+}
+
+
+/* Layout */
+body {
+    max-width: 500px; 
+    margin: 0 auto;
+    background-color: var(--main-color);
+    text-align: center;
+}
+
+.container {
+    margin-top: 50%;
+}
+
+/* Components */
+button {
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
+    padding: 14px 8px;
+    border-radius: 6px;
+    font-size: 2rem;
+    width: 100px;
+}
+button:hover {
+    cursor: pointer;
+    background-color: var(--button-hover-color);
+}
+
+.icon_bluetooth {
+    height: 80px;
+    margin-bottom: 3rem;
+}
+
+/* container 화면 */
+.container h3 {
+    font-size: 5rem;
+    margin-bottom: 3rem;
+}
