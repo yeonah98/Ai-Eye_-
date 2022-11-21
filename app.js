@@ -4,11 +4,12 @@ const path = require('path');
 const http = require('http');
 const server = http.createServer(app);
 const fs = require('fs');
+require('dotenv').config();
 
 //카카오 인증
 
 const request = require('request');
-const accessToken = "qAhng_pWqiBJVswOhAjpSJJfEcICCXwSegYt6uLiCisM0gAAAYSbE4TZ";
+const accessToken = process.env.accessToken;
 
 let headers = {
     "Content-Type": "application/x-www-form-urlencoded",
