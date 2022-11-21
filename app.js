@@ -5,6 +5,79 @@ const http = require('http');
 const server = http.createServer(app);
 const fs = require('fs');
 
+//카카오 인증
+
+const request = require('request');
+const accessToken = "qAhng_pWqiBJVswOhAjpSJJfEcICCXwSegYt6uLiCisM0gAAAYSbE4TZ";
+
+let headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: "Bearer " + accessToken,
+};
+
+let faint_dataString = `template_object={
+        "object_type": "text",
+        "text": "쓰러짐 위험상황이 발생했습니다!",
+        "image_url": "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+            "image_width": 640,
+            "image_height": 640,
+        "link": {
+            "web_url": "http://naver.com",
+            "mobile_web_url": "http://m.naver.com"
+        },
+        "button": {
+            "title" : "네이버 가기",
+            "link" : {
+                "web_url": "http://naver.com",
+                "mobile_web_url": "http://naver.com"
+            }
+        }
+    }`;
+
+let climb_dataString = `template_object={
+    "object_type": "text",
+    "text": "추락 위험상황이 발생했습니다!",
+    "image_url": "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+        "image_width": 640,
+        "image_height": 640,
+    "link": {
+        "web_url": "http://naver.com",
+        "mobile_web_url": "http://m.naver.com"
+    },
+    "button": {
+        "title" : "네이버 가기",
+        "link" : {
+            "web_url": "http://naver.com",
+            "mobile_web_url": "http://naver.com"
+        }
+    }
+}`;   
+
+let faint_options = {
+    url: "https://kapi.kakao.com/v2/api/talk/memo/default/send",
+    method: "POST",
+    headers: headers,
+    body: faint_dataString,
+};
+
+let climb_options = {
+    url: "https://kapi.kakao.com/v2/api/talk/memo/default/send",
+    method: "POST",
+    headers: headers,
+    body: climb_dataString,
+};
+
+function callback(error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log("메시지 전송 완료.");
+    } else {
+        console.log(error);
+    }
+}
+
+//오디오 사용
+const player = require('play-sound')(opts = {})
+
 //웹소켓
 const socketIO = require('socket.io');
 const { off } = require('process');
@@ -13,69 +86,64 @@ const io = socketIO(server);
 console.log(io)
 const directoryPath = path.join(__dirname, '/testdata')
 
-// function readdetailfile(filename) {
-//     let res;
-//     fs.readFileSync(directoryPath + '/' + filename, 'utf-8', (err, data) =>{
-//         if (err) throw err
-//         res= data[0]
-//     })
-//     return res;
-// }
-
 io.on('connection', (socket) => {
-        
-        
+        let fileNum = 0;
+        let NewFileNum =0;
         setInterval(function () {
-            
-            fs.readdir(directoryPath, function(err, files){
-                if(err){
-                    return console.log('Unable to scan directory' + err)
-                }
-                const list = files.map(filename => {
-                    let parsedfilename = filename.split('_')
-                    parsedfilename = parsedfilename[parsedfilename.length-1]
-                    parsedfilename = parsedfilename.split('.txt')[0]
-                    return {
-                        filename: parsedfilename,
-                        mtime: fs.statSync(directoryPath + '/' + filename).mtime,
-                        data: fs.readFileSync(directoryPath + '/' + filename,{encoding:'utf8',flag:'r'})[0]
-                    }
-                })
-                list.sort((a,b) => b.mtime - a.mtime)
-                // console.log(list);
-                if(list.length >= 5){
-                    let cnt_1 = 0;
-                    let cnt_2 = 0;
-                    let constly = 0;
-                    for(let i =0; i <5 ; i++){
+            //현재 파일의 개수
+            fs.readdir(directoryPath, (err, files) => {
+                NewFileNum = files.length;
+            })
 
-                        if(list[i].data == 1) cnt_1 += 1;
-                        if(list[i].data == 2) cnt_2 += 1;
-                        // console.log(list[i].filename)
-                        // console.log(+list[i+1].filename+1)
-                        if(i == 4) continue;
-                        if(list[i].filename == +list[i+1].filename+1){ 
-                            constly += 1;
-                        } else {
-                            constly = 0;
-                        }
+            //기존 개수 != 현재 개수 이벤트 발생 후, 기존개수 현재개수로 업데이트
+            if(fileNum != NewFileNum) {
+                fileNum = NewFileNum;
+
+                //어떤 위험상황 파일인지 확인 후 알림 보내기
+                fs.readdir(directoryPath, function(err, files){
+                    if(err){
+                        return console.log('Unable to scan directory' + err)
                     }
-                    if(constly == 4 && cnt_1 == 5){
+                    //위험상황 이름으로 표시
+                    const list = files.map(filename => {
+                        let parsedfilename = filename.split('_')
+                        parsedfilename = parsedfilename[0]
+                        return {
+                            filename: parsedfilename,
+                            mtime: fs.statSync(directoryPath + '/' + filename).mtime,
+                        }
+                    })
+                    //시간 순으로 정렬
+                    list.sort((a,b) => b.mtime - a.mtime)
+                    // console.log(list);
+                    
+                    // 위험상황 확인 후 알림
+                    if(list[0].filename == 'faint'){
                         io.emit('chatting', `아이에게 쓰러짐 행동이 감지되었습니다.`);
-                        console.log('돔황챠');
-                    } else if(constly == 4 && cnt_2 == 5){
+                        //알림음 재생
+                        player.play('emergency.mp3', function(err){
+                            if(err) throw err
+                        });
+                        //카톡 나에게 전송
+                        request(faint_options, callback);
+                        console.log('faint 발생');
+                    } else if(list[0].filename == 'climb'){
                         io.emit('chatting', `아이에게 추락 행동이 감지되었습니다.`);
-                        console.log('돔황챠');
+                        //알림음 재생
+                        player.play('emergency.mp3', function(err){
+                            if(err) throw err
+                        });
+                        //카톡 나에게 전송
+                        request(climb_options, callback);
+                        console.log('climb 발생');
                     } else {
                         console.log('안전함')
-                        console.log(constly)
-                        console.log(cnt_1)
-                        console.log(cnt_2)
-                    }
+                    }                               
+                })
 
-                }                                
-            })
-        }, 3000);
+            }
+        
+        }, 1000);
 
         
 });
@@ -102,6 +170,3 @@ app.get("/setting", (req, res) => {
 server.listen(PORT, () => {
     console.log(`server is running ${PORT}`);
   });
-
-
-
