@@ -19,15 +19,11 @@ let headers = {
 let faint_dataString = `template_object={
         "object_type": "text",
         "text": "쓰러짐 위험상황이 발생했습니다!",
-        "image_url": "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
-            "image_width": 640,
-            "image_height": 640,
         "link": {
             "web_url": "http://naver.com",
             "mobile_web_url": "http://m.naver.com"
         },
         "button": {
-            "title" : "네이버 가기",
             "link" : {
                 "web_url": "http://naver.com",
                 "mobile_web_url": "http://naver.com"
@@ -38,15 +34,11 @@ let faint_dataString = `template_object={
 let climb_dataString = `template_object={
     "object_type": "text",
     "text": "추락 위험상황이 발생했습니다!",
-    "image_url": "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
-        "image_width": 640,
-        "image_height": 640,
     "link": {
         "web_url": "http://naver.com",
         "mobile_web_url": "http://m.naver.com"
     },
     "button": {
-        "title" : "네이버 가기",
         "link" : {
             "web_url": "http://naver.com",
             "mobile_web_url": "http://naver.com"
@@ -72,6 +64,7 @@ function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
         console.log("메시지 전송 완료.");
     } else {
+        console.log(" 에러 ");
         console.log(error);
     }
 }
@@ -88,17 +81,19 @@ console.log(io)
 const directoryPath = path.join(__dirname, '/testdata')
 
 io.on('connection', (socket) => {
-        let fileNum = 0;
-        let NewFileNum =0;
+        let fileNum = 3;
+        let NewFileNum = 3;
         setInterval(function () {
             //현재 파일의 개수
             fs.readdir(directoryPath, (err, files) => {
                 NewFileNum = files.length;
+
             })
 
             //기존 개수 != 현재 개수 이벤트 발생 후, 기존개수 현재개수로 업데이트
-            if(fileNum != NewFileNum) {
+            if(NewFileNum != fileNum) {
                 fileNum = NewFileNum;
+                // NewFileNum = 3;
 
                 //어떤 위험상황 파일인지 확인 후 알림 보내기
                 fs.readdir(directoryPath, function(err, files){
@@ -115,11 +110,12 @@ io.on('connection', (socket) => {
                         }
                     })
                     //시간 순으로 정렬
-                    list.sort((a,b) => b.mtime - a.mtime)
+                    // list.sort((a,b) => b.mtime - a.mtime)
+                    console.log(list)
                     // console.log(list);
                     
                     // 위험상황 확인 후 알림
-                    if(list[0].filename == 'faint'){
+                    if(list[1].filename == 'faint'){
                         io.emit('chatting', `아이에게 쓰러짐 행동이 감지되었습니다.`);
                         //알림음 재생
                         player.play('emergency.mp3', function(err){
@@ -128,7 +124,7 @@ io.on('connection', (socket) => {
                         //카톡 나에게 전송
                         request(faint_options, callback);
                         console.log('faint 발생');
-                    } else if(list[0].filename == 'climb'){
+                    } else if(list[1].filename == 'climb'){
                         io.emit('chatting', `아이에게 추락 행동이 감지되었습니다.`);
                         //알림음 재생
                         player.play('emergency.mp3', function(err){
