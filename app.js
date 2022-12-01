@@ -78,11 +78,11 @@ const { off } = require('process');
 console.log(socketIO);
 const io = socketIO(server);
 console.log(io)
-const directoryPath = path.join(__dirname, '/testdata')
+const directoryPath = path.join(__dirname, '/yoloData')
 
 io.on('connection', (socket) => {
-        let fileNum = 3;
-        let NewFileNum = 3;
+        let fileNum = 0;
+        let NewFileNum = 0;
         setInterval(function () {
             //현재 파일의 개수
             fs.readdir(directoryPath, (err, files) => {
@@ -115,7 +115,7 @@ io.on('connection', (socket) => {
                     // console.log(list);
                     
                     // 위험상황 확인 후 알림
-                    if(list[1].filename == 'faint'){
+                    if(list[0].filename == 'faint'){
                         io.emit('chatting', `아이에게 쓰러짐 행동이 감지되었습니다.`);
                         //알림음 재생
                         player.play('emergency.mp3', function(err){
@@ -124,7 +124,7 @@ io.on('connection', (socket) => {
                         //카톡 나에게 전송
                         request(faint_options, callback);
                         console.log('faint 발생');
-                    } else if(list[1].filename == 'climb'){
+                    } else if(list[0].filename == 'climb'){
                         io.emit('chatting', `아이에게 추락 행동이 감지되었습니다.`);
                         //알림음 재생
                         player.play('emergency.mp3', function(err){
