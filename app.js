@@ -124,7 +124,7 @@ io.on('connection', (socket) => {
                         //카톡 나에게 전송
                         request(faint_options, callback);
                         console.log('faint 발생');
-                    } else if(list[0].filename == 'climb'){
+                    } else if(list[0].filename == 'climbing'){
                         io.emit('chatting', `아이에게 추락 행동이 감지되었습니다.`);
                         //알림음 재생
                         player.play('emergency.mp3', function(err){

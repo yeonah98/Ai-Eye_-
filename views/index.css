@@ -59,15 +59,15 @@ button {
     padding: 14px 8px;
     border-radius: 6px;
     font-size: 2rem;
-    width: 100px;
+    width: 180px;
 }
 button:hover {
     cursor: pointer;
     background-color: var(--button-hover-color);
 }
 
-.icon_bluetooth {
-    height: 80px;
+.icon_kakao {
+    height: 100px;
     margin-bottom: 3rem;
 }
 
