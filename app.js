@@ -110,7 +110,7 @@ io.on('connection', (socket) => {
                         }
                     })
                     //시간 순으로 정렬
-                    // list.sort((a,b) => b.mtime - a.mtime)
+                    list.sort((a,b) => b.mtime - a.mtime)
                     console.log(list)
                     // console.log(list);
                     
