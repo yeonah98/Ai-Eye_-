@@ -118,6 +118,7 @@ body {
     padding: 2rem;
     margin-bottom: 1rem;
     display: flex;
+    justify-content: flex-start;
 }
 .whiteBox h3 {
     font-size: 1.6rem;
