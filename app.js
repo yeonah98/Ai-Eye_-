@@ -72,6 +72,9 @@ function callback(error, response, body) {
 //오디오 사용
 const player = require('play-sound')(opts = {})
 
+// 오디오 사용 새로운 시도
+
+
 //웹소켓
 const socketIO = require('socket.io');
 const { off } = require('process');
@@ -117,19 +120,23 @@ io.on('connection', (socket) => {
                     // 위험상황 확인 후 알림
                     if(list[0].filename == 'faint'){
                         io.emit('chatting', `아이에게 쓰러짐 행동이 감지되었습니다.`);
+
                         //알림음 재생
-                        player.play('emergency.mp3', function(err){
-                            if(err) throw err
-                        });
+                        // player.play('emergency.mp3', function(err){
+                        //     if(err) throw err
+                        // });
+                        
                         //카톡 나에게 전송
                         request(faint_options, callback);
                         console.log('faint 발생');
                     } else if(list[0].filename == 'climbing'){
                         io.emit('chatting', `아이에게 추락 행동이 감지되었습니다.`);
+
                         //알림음 재생
-                        player.play('emergency.mp3', function(err){
-                            if(err) throw err
-                        });
+                        // player.play('emergency.mp3', function(err){
+                        //     if(err) throw err
+                        // });
+
                         //카톡 나에게 전송
                         request(climb_options, callback);
                         console.log('climb 발생');
